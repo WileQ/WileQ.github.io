@@ -1,19 +1,16 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 import subprocess
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/run', methods=['POST'])
 def run_python_script():
     try:
-        # Get the Python code from the incoming request
         data = request.json
         code = data.get('code', '')
-
-        # Execute the Python code using subprocess
         result = subprocess.run(['python', '-c', code], capture_output=True, text=True)
-
-        # Return the result
         return jsonify({
             'output': result.stdout,
             'error': result.stderr
@@ -24,5 +21,4 @@ def run_python_script():
         }), 500
 
 if __name__ == '__main__':
-    # This is just for local testing
-    app.run(debug=True)
+    app.run()
