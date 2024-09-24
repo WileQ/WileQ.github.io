@@ -2,3 +2,4 @@ Flask
 numpy
 waitress
 flask-cors
+pygame
