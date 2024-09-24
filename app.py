@@ -10,7 +10,7 @@ def run_python_script():
         data = request.json
         code = data.get('code', '')
 
-        # Execute the Python code using subprocess or exec (be cautious with exec)
+        # Execute the Python code using subprocess
         result = subprocess.run(['python', '-c', code], capture_output=True, text=True)
 
         # Return the result
@@ -24,4 +24,5 @@ def run_python_script():
         }), 500
 
 if __name__ == '__main__':
+    # This is just for local testing
     app.run(debug=True)
